@@ -1,7 +1,7 @@
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
-Pattern = Annotated[str, StringConstraints(pattern=r"ST-\s^s^\d{4}$")]
+Pattern = Annotated[str, StringConstraints(pattern=r"ST-\d{4}$")]
 class EquipmentCreate(BaseModel):
     equipment_id:int
     student_id:Pattern
@@ -15,4 +15,3 @@ class EquipmentRead(BaseModel):
     description:str
     priority:int
     status:str
-    
