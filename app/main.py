@@ -14,7 +14,7 @@ def health():
     return{"status": "ok"}
 
 @app.post(
-    "/api/equipments",
+    "/api/requests",
     response_model= EquipmentRead,
     status_code=status.HTTP_201_CREATED,
 )
@@ -30,7 +30,7 @@ def create_equipment(equipment_in:EquipmentCreate, db:Session= Depends(get_db)):
             status_code=status.HTTP_409_CONFLICT, detail="equipment with this unique detail already exists",)
     return db_equipment
 
-@app.get("/api/equipments", response_model=list[EquipmentRead])
+@app.get("/api/requests", response_model=list[EquipmentRead])
 def get_equipment(db:Session=Depends(get_db)):
     stmt=select(EquipmentDB).order_by(EquipmentDB.id)
     return db.execute(stmt).scalars().all()
